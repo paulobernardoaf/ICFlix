@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="./css/css-posts.css">
+    <title> Nova Categoria </title>
+</head>
+<body>
+    <center>
+        <br></br><br></br>
+        <h1 style="color: #E7CC34;">Nova Categoria</h1>
+        <form action="/categories" method="POST">
+            <input id="name" type="text" placeholder="Nome da Categoria" name="name"></input><br></br>
+            <input id="exibir" type="checkbox" name="exibir"><label for=myCheckbox>Exibir na tela inicial?</label></input><br></br>            
+            <button type="button" onclick="post()">Enviar</button>
+        </form>
+    </center>
+    <script>
+    
+        function post() {
+            var check = null;
+            if(document.getElementById("exibir").checked)
+            {
+                check = '1';
+            }
+                var json = {
+                    "name": document.getElementById("name").value,
+                    "exibir": check
+                }
+                json = JSON.stringify(json);
+                xhr = new XMLHttpRequest();
+                xhr.open('POST', '/categories');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        window.location.href = "/gerenciar_categorias"
+                    }
+                    else if (xhr.status !== 200) {
+                        alert('Request failed.  Returned status of ' + xhr.status);
+                    }
+                };
+                xhr.send(json);
+            }    
+    </script>
+</body>
+</html>

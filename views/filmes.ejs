@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Gerência de Filmes</title>
+    <link rel="stylesheet" type="text/css" href="./css/css-tabela-filme.css">
+</head>
+<body style="font-family:Roboto;text-align:left;">
+    <div id="navbar">
+        <form style="float: left;margin:0em 1em 0em 0em;" method="GET" action="/home">
+            <button type="submit">Voltar para Home</button>
+        </form>
+        <h1 style="color:#E7CC34; margin: 1em 0em 1em 43%">Gerência de Filmes</h1>        
+    </div>        
+        <form id="demo" style="text-align: center; margin-top: 7.5em;">
+            <button type="button" id="irButton" onclick="get()">Novo Filme</button>
+        </form>
+        <br></br>
+        <table id="tabela.categorias" class="movies">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>CATEGORIAS</th>
+                    <th>DESCRIÇÂO</th>
+                    <th>IMAGENS</th>
+                    <th>IMAGENS 1280x720</th>
+                    <th>TRAILER</th>
+                    <th>AVALIAÇÃO</th>
+                    <th>AÇÔES</th>
+                </tr>
+            </thead>
+            <tbody class="movies">
+                <% for(var i=0; i<movies.length; i++) { %> 
+                    <tr class="movie">
+                        <td>
+                            <%= movies[i]._id %>
+                        </td>
+                        <td id="nome" onclick="temQir('<%= movies[i]._id %>')">
+                            <%= movies[i].nome %>
+                        </td>
+                        <td id="filmesCategorias" > 
+                        <% if(typeof movies[i].categorias != 'undefined') { %> 
+                            <% for(var j=0; j<movies[i].categorias.length; j++) { %>  
+                                <% for(var k=0; k<categories.length; k++) { %> 
+                                    <% var categoria = categories[k]._id + ''; %>
+                                    <% var categoriaDoFilme = movies[i].categorias[j] + ''; %>
+                                    <% if(categoria == categoriaDoFilme) { %>
+                                        <%= categories[k].name %> 
+                                        <% if(k<movies[i].categorias.length - 1) { %> , <% } %>
+                        <% }}}} %>  
+                        </td>
+                        <td>
+                            <%= movies[i].descricao %>
+                        </td>
+                        <td>
+                            <img width="100px"src="<%= movies[i].imagem %>"/>
+                        </td>
+                        <td>
+                            <img width="200" src="<%= movies[i].imagem2 %>"/>
+                        </td>
+                        <td>
+                            <a href="<%= movies[i].trailer %>">Trailer</a>
+                        </td>
+                        <td>
+                            <%= movies[i].avaliacao %>
+                        </td>
+                        <td>
+                            <select data-id='<%= movies[i]._id %>' onchange="data(this.value, '<%= movies[i]._id %>');">
+                  <option disable selected style="display: none; font-size:14px; text-align: center;">Opções</option>
+                  <option value="1" style="font-size: 14px;">Editar</option>
+                  <option value="2" style="font-size: 14px;">Excluir</option>
+                  <option value="3" style="font-size: 14px;">Add Categorias</option>
+                  <option value="4" style="font-size: 14px;">Remover Categoria</option>
+                </select>
+                        </td>
+                        <td hidden>
+                            <p hidden="true" class="id">
+                                <%= movies[i]._id %>
+                            </p>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    <script>
+
+        function get() {               
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', "/novo_filme");
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        window.location.href = "/novo_filme"
+                    }
+                    else {
+                        alert('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send();
+            }
+
+            function temQir(x) {                
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', "/filme/" + x);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        window.location.href = "/filme/" + x
+                    }
+                    else {
+                        alert('Request failed.  Returned status of ' + xhr.status);
+                    }
+                };
+                xhr.send();
+            }
+
+        //o botao 
+        function data(op, x) {
+            var a = $(this).closest('.p').find('#id');
+            console.log(a);
+            var id = $("select").data('id')
+            console.log(x);
+            if (op === "1") {
+                console.log('edit');
+                var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "/editMovie/" + x);
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            window.location.href = "/editMovie/" + x
+                        }
+                        else {
+                            alert('Request failed.  Returned status of ' + xhr.status);
+                        }
+                    };
+                    xhr.send();
+            }
+            else if (op === "2") {
+                console.log(id);
+                var confirmar = confirm('Deseja realmente deletar esse filme?')
+                if (confirmar) {                   
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('DELETE', "/movies/" + x);
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            window.location.href = "/gerenciar_filmes"
+                        }
+                        else {
+                            alert('Request failed.  Returned status of ' + xhr.status);
+                        }
+                    };
+                    xhr.send();
+                }               
+            }
+            else if(op === "3")
+            {
+                window.location.href = "/addCategorias/" + x
+            }
+            else if(op === "4")
+            {
+                window.location.href = "/removeCategorias/" + x
+            }
+        }
+    </script>
+</body>
+</html>

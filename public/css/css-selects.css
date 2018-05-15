@@ -1,0 +1,53 @@
+body {
+    font-family: Roboto;
+    background-color: #0F0F0F;
+}
+
+button {
+    background-color: #E7CC34;
+    text-align: center;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    box-shadow: 1px 7px 36px black;
+}
+
+input {
+    font-size: 16px;
+    border-radius: 6px;
+    border-style: solid;
+    box-shadow: 1px 7px 36px black;
+    padding: 15px 27px;
+}
+
+select,
+option {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #E7CC34;
+    text-align: center;
+    font-size: 22px;
+}
+
+select:hover {
+    background-color: #C2A62C;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #C2A62C;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #AA9224;
+    cursor: pointer;
+}
+
+#nome:hover {
+    color: #C2A62C;
+    cursor: pointer;
+}

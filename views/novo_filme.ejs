@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="./css/css-posts.css">
+    <title> Novo Filme </title>
+</head>
+<body>
+    <form style="float: left;margin:0em 1em 0em 0em;">
+        <button type="button" onclick="get()">Voltar</button>
+    </form>
+    <center>
+        <br></br><br></br>
+    <h1 style="color: #E7CC34;">Novo Filme</h1>
+    <form action="/movies" method="POST">
+        <input id="nome" type="text" placeholder="Nome do Filme" name="nome" required></input><br></br>
+        <input id="descricao" type="text" placeholder="Descrição do Filme" name="descricao" required></input><br></br>
+        <input id="avaliacao" type="text" placeholder="Avaliação do Filme" name="avaliacao" required></input><br></br>
+        <input id="trailer" type="text" placeholder="Link do Trailer(Youtube Embed)" name="trailer" required></input><br></br>
+        <input id="imagem" type="text" placeholder="Link da Imagem(Poster)" name="imagem" required></input><br></br>
+        <input id="imagem2" type="text" placeholder="Link da Imagem(1280x720)" name="imagem2" required></input><br></br>
+        <button type="button" onclick="post()">Enviar</button>
+    </form>
+</center>
+<script>
+
+    function get() {
+            var xhtml = new XMLHttpRequest();
+            xhtml.open('GET', '/gerenciar_filmes');
+            xhtml.onload = function () {
+                if (xhtml.status === 200) {
+                    window.location = "/gerenciar_filmes";
+                }
+                else {
+                    alert('Request failed.  Returned status of ' + xhtml.status);
+                };
+            }
+            xhtml.send();
+        }
+
+        function post() {            
+            var json = {
+                "nome": document.getElementById("nome").value,
+                "descricao": document.getElementById("descricao").value,
+                "avaliacao": document.getElementById("avaliacao").value,
+                "trailer": document.getElementById("trailer").value,
+                "imagem": document.getElementById("imagem").value,
+                "imagem2": document.getElementById("imagem2").value
+            }
+            json = JSON.stringify(json);
+            xhr = new XMLHttpRequest();
+            xhr.open('POST', '/movies');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    window.location.href = "/gerenciar_filmes"
+                }
+                else if (xhr.status !== 200) {
+                    alert('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send(json);
+        }
+</script>
+</body>
+</html>

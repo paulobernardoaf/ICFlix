@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/css-selects.css">        
+    </style>
+    <title> Remover Categoria de <%= movies.name %> </title>
+</head>
+<body>
+    <form style="float: left;margin:0em 1em 0em 0em;" id="demo">
+        <button type="button" onclick="get('/gerenciar_categorias')">Voltar para Gerência</button>
+    </form>
+    <center>
+        <br></br><br></br>
+        <h1 style="color: #E7CC34;">Remover Categoria do Filme:
+            <%= movies.nome %>
+        </h1>
+        <select onchange="change(this.value, '<%= movies._id %>')">
+            <option hidden >Categorias</option>
+            <% for(var i=0;i<categories.length;i++) { %>
+                <option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
+                <% } %>
+            </select>
+    </center>
+    <script>
+       function get() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    window.location.href = "/gerenciar_filmes"
+                }
+            };
+            xhttp.open("GET", "/gerenciar_filmes", true);
+            xhttp.send();
+        }
+
+        function change(val, id) {
+            console.log(val);
+            var xhr = new XMLHttpRequest();
+            xhr.open('PUT', '/movies/' + id + '/removeCategory/' + val);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    window.location.href = "/gerenciar_filmes"
+                }
+            };
+            xhr.send(null)
+        }
+    </script>
+</body>
+</html>

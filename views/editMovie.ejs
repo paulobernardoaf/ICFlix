@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>    
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/css-posts.css">
+    <title>Editar Filme <%= movies.nome %></title>
+</head>
+<body id="moviee">
+    <form style="float: left;margin:0em 1em 0em 0em;" id="demo">
+        <button type="button" onclick="get('/gerenciar_categorias')">Voltar para Gerência</button>
+    </form>
+    <center>
+        <br></br><br></br>
+        <h1 style="color: #E7CC34;">Atualizar: <%= movies.nome %></h1>
+        <form action="/movies/:id">
+            <input required id="novonome" type="text" placeholder="Novo Nome do Filme" name="nome"></input><br></br>
+            <input required id="novadescricao" type="text" placeholder="Nova Descrição do Filme" name="descricao"></input><br></br>
+            <input required id="novaavaliacao" type="text" placeholder="Nova Avaliação do Filme" name="avaliacao"></input><br></br>
+            <input required id="novotrailer" type="text" placeholder="Novo Link do Trailer(Youtube Embed)" name="trailer"></input><br></br>
+            <input required id="novaimagem" type="text" placeholder="Novo Link da Imagem(Poster)" name="imagem"></input><br></br>
+            <input id="novaimagem2" type="text" placeholder="Novo Link da Imagem(1280x720)" name="imagem2" required></input><br></br>
+        </form>
+        <button type="button" onclick="change('<%= movies._id %>')">Enviar</button>
+    </center>
+    <script type="text/javascript">
+
+           function get() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.href = "/gerenciar_filmes"
+                    }
+                };
+                xhttp.open("GET", "/gerenciar_filmes", true);
+                xhttp.send();
+            }
+
+            function wait(ms) {
+                    var start = new Date().getTime();
+                    var end = start;
+                    while (end < start + ms) {
+                        end = new Date().getTime();
+                    }
+                }
+                            
+            function change(id) {
+                var json = {
+                "nome": document.getElementById("novonome").value,
+                "descricao": document.getElementById("novadescricao").value,
+                "avaliacao": document.getElementById("novaavaliacao").value,
+                "trailer": document.getElementById("novotrailer").value,
+                "imagem": document.getElementById("novaimagem").value,
+                "imagem2": document.getElementById("novaimagem2").value
+            }
+            json = JSON.stringify(json);
+            console.log(id);
+            console.log(json);
+            var xhr = new XMLHttpRequest();
+            xhr.open('PUT', '/movies/' + id);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                }
+            };
+            xhr.send(json)
+            window.location.href = "/gerenciar_filmes"
+            }
+    </script>
+</body>
+</html>

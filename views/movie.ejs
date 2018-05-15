@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title> Filme <%= movies.nome %> </title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/css-movie.css">
+</head>
+<body style="background-image: url('<%= movies.imagem2 %>');background-size:inherit;background-attachment: fixed;background-repeat: no-repeat;">
+    <div id="navbar">
+        <a id="img" href="/home">
+                <img src="../logoICFlix.svg" alt="" width= 110em />
+            </a>
+        <a id="novofilme" href="/gerenciar_filmes">Gerência de Filmes</a>
+        <a id="novacategoria" href="/gerenciar_categorias">Gerência de Categorias</a>
+    </div>
+    <center>
+    <div id="filme">
+        <h2> <%= movies.nome %> </h2>
+        <img id="imgm" style="width:350px;height:550;" src="<%= movies.imagem %>"></img>            
+        <h2> <%= movies.avaliacao %>/10 </h2>        
+        <h2> <%= movies.descricao %> </h2>        
+        <a id="trailer" href="#" onclick="document.getElementById('pop').style.display = 'block';">TRAILER</a>        
+    </div>
+    <div id="pop">            
+            <a style="text-align: left;" href="#" class="cancel" onclick="document.getElementById('pop').style.display = 'none';"></a>
+            <iframe width="1280px" height="720px" src="<%=movies.trailer%>"></iframe>
+        </div>
+</body>
+</html>
+

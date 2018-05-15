@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/css-posts.css">
+    <title> Editar Categoria: <%= categories.name %> </title>
+</head>
+<body>
+    <form style="float: left;margin:0em 1em 0em 0em;" id="demo">
+        <button type="button" onclick="get('/gerenciar_categorias')">Voltar para Gerência</button>
+    </form>
+    <center>
+        <br></br><br></br>
+        <h1 style="color: #E7CC34;">Editar Categoria: <%= categories.name %></h1>
+        <form action="/categories" method="POST">
+            <input id="name" type="text" placeholder="Novo nome da Categoria" name="name"></input><br></br>
+            <input id="exibir" type="checkbox" name="exibir" value="1"><label for=myCheckbox>Exibir na tela inicial?</label></input><br></br>
+            <button type="button" onclick="put('<%= categories._id %>')">Enviar</button>
+        </form>
+    </center>
+    <script>
+        function get() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.href = "/gerenciar_categorias"
+                    }
+                };
+                xhttp.open("GET", "/gerenciar_categorias", true);
+                xhttp.send();
+            }
+
+        function put(x) {
+            console.log(x);
+            var check = null; 
+            if (document.getElementById("exibir").checked)
+            {
+                check = '1';
+            }
+            var json = {
+                "name": document.getElementById("name").value,
+                "exibir": check
+            }
+            json = JSON.stringify(json);
+            xhr = new XMLHttpRequest();
+            xhr.open('PUT', '/categories/' + x);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    window.location.href = "/gerenciar_categorias"
+                }
+                else if (xhr.status !== 200) {
+                    alert('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send(json);
+        }
+    </script>
+</body>
+</html>

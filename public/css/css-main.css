@@ -1,0 +1,112 @@
+html {
+    -webkit-font-smoothing: antialiased;
+    float: left;
+}
+
+#img {
+    float: left;
+    margin: 0.7em 0.7em 0.7em 2em;
+    width: 7%;
+}
+
+#novofilme {
+    text-decoration: none;
+    color: #E7CC34;
+    font-size: 1.1em;
+    margin-left: 70em;
+    margin-top: 1em;
+    float: left;
+    letter-spacing: 0.5px;
+}
+
+#novacategoria {
+    text-decoration: none;
+    color: #E7CC34;
+    font-size: 1.1em;
+    margin: 1em 0em 1em 1em;
+    float: left;
+    letter-spacing: 0.5px;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.74);
+}
+
+#imagens {
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-bottom: 4em;
+}
+
+li {
+    width: 250px;
+    height: 400px;
+    background: #fff;
+    float: left;
+    margin-left: 1.7em;
+    margin-right: 2em;
+    margin-top: 5em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    transform: scale(1);
+    visibility: visible;
+}
+
+li:hover {
+    cursor: pointer;
+    transform: scale(1);
+    visibility: visible;
+    transition: all .2s ease-in-out;
+    transform: scale(1.1);
+    z-index: 100;
+    position: relative;
+    transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+    transition-duration: 500ms;
+}
+
+select {
+    text-decoration: none;
+    background-color: #0E0F11;
+    border-collapse: collapse;
+    border: none;
+    outline: hidden;
+    color: #E7CC34;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    margin: 1em 0em 0em 1.5em;
+    float: left;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    background: #111111;
+    font-family: 'Oswald', sans-serif;
+}
+
+select:hover {
+    background-color: #272727;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #C2A62C;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #AA9224;
+    cursor: pointer;
+}
+
+#nome:hover {
+    color: #C2A62C;
+    cursor: pointer;
+}

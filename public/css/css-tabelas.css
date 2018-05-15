@@ -1,0 +1,67 @@
+body {
+    align-content: center;
+    background-color: #0F0F0F;
+}
+
+th,
+td {
+    border: 0.5px;
+    border-style: solid;
+    border-color: #FCDE4A;
+    padding: 12px;
+    color: white;
+    font-weight: 300;
+}
+
+th {
+    background-color: #E7CC34;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    border-bottom-width: 3px;
+}
+
+button {
+    background-color: #E7CC34;
+    text-align: center;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    box-shadow: 1px 7px 36px #000000;
+}
+
+select,
+option {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #E7CC34;
+}
+
+table {
+    text-align: left;
+    border-collapse: collapse;
+    box-shadow: 1px 7px 36px #000000;
+}
+
+select:hover {
+    background-color: #C2A62C;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #C2A62C;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #AA9224;
+    cursor: pointer;
+}
+
+#nome:hover {
+    color: #C2A62C;
+    cursor: pointer;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Gerência de Categorias</title>
+    <link rel="stylesheet" type="text/css" href="./css/css-tabelas.css">
+</head>
+<body style="font-family:Roboto;text-align:left;">    
+    <form style="float: left;margin:0.5 em 1em 0em 0em;" method="GET" action="/home">
+        <button type="submit">Home</button>
+    </form>
+        <h1 style="color:#E7CC34;  margin: 1em 0em 1em 41.5%">Gerência de Categorias</h1>
+        <form method="get" action="/nova_categoria" style="text-align: center;">
+            <button id="irButton" type="submit">Nova Categoria</button>
+        </form>
+        <br></br>
+        <center>
+            <table id="tabela.categorias" , class="movies">
+                <thead>
+                    <tr>
+                        <th style="text-align:center;border-bottom-width:3px;font-weight:300;background-color:#E7CC34">ID</th>
+                    <th>NOME</th>
+                    <th>EXIBIR</th>
+                    <th>FILMES</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>            
+            <tbody class="movies">
+                <% for(var i=0, j=1; i<categories.length; i++, j++) {%>
+                    <tr class="movie">
+                        <td>
+                            <%= [j] %>
+                        </td>
+                        <td>
+                            <%= categories[i].name %>
+                        </td>
+                        <td>
+                            <% if(typeof categories[i].exibir == 'undefined' || categories[i].exibir == null) { %>
+                                Não
+                            <% } else { %>
+                                Sim
+                            <% } %>
+                        </td>
+                        <td>
+                            <button type="button" onclick="filmes('<%= categories[i]._id %>')">Ver Filmes</button>
+                        </td>
+                        <td>                           
+                            <select data-id='<%= categories[i]._id %>' onchange="data(this.value, '<%= categories[i]._id %>');">
+                                <option disable selected style="display: none; font-size:14px">Opções</option>
+                                <option value="1" style="font-size: 14px;">Editar</option>
+                                <option value="2" style="font-size: 14px;">Excluir</option>
+                            </select>
+                        </td>
+                        <td hidden>
+                            <p hidden="true" class="id">
+                                <%= categories[i]._id %>
+                            </p>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>                
+            </table>            
+            <script>
+                function filmes(x) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "/categoria/" + x + "/filmes");
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            window.location.href = "/categoria/" + x + "/filmes"
+                        }
+                        else {
+                            alert('Request failed.  Returned status of ' + xhr.status);
+                        }
+                    };
+                    xhr.send();
+                }
+                
+                function data(op, x) {
+                    var a = $(this).closest('.p').find('#id');
+                    console.log(a);
+                    var id = $("select").data('id')
+                    console.log(x);                    
+                    if (op === "1") {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', "/editCategories/" + x);
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                window.location.href = "/editCategories/" + x
+                            }
+                            else {
+                                alert('Request failed.  Returned status of ' + xhr.status);
+                            }
+                        };
+                        xhr.send();
+
+                    }
+                    else if (op === "2") {
+                        console.log(id);
+                        var confirmar = confirm('Deseja realmente deletarr essa categoria?')
+                        
+                        if (confirmar) {
+                            $.ajax({
+                                method: 'DELETE',
+                                url: '/categories/' + x,
+                                contentType: 'application/json',
+                                success: function (response) {
+                                    console.log('aaaa');
+                                    console.log(response);
+                                }
+                            });
+                        }
+                    }
+                    window.location.href = "/gerenciar_categorias"
+                }
+                </script>
+</center>
+</body>
+</html>

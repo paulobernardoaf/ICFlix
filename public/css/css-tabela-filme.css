@@ -1,0 +1,97 @@
+body {
+            align-content: center;
+            background-color: #0F0F0F;
+        }
+
+        th,
+        td {
+            border: 1px;
+            border-style: solid;
+            border-color: #FCDE4A;
+            padding: 0.5em 0em 0.5em 0em;
+            color: white;
+            font-weight: 300;
+            max-width: 20em !important;
+            overflow: auto;
+        }
+
+        
+        
+        th {
+            background-color: #E7CC34;
+            text-align: center;
+            padding: 0.5em 0.5em 0.5em 0.5em;
+            color: black;
+            font-weight: bold;
+            border-bottom-width: 3px;
+            width: 40em;
+            max-width: 20em !important;
+        }
+        
+        button {
+            background-color: #E7CC34;
+            text-align: center;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 6px;
+            box-shadow: 1px 7px 36px #000000;
+        }
+
+        select,
+        option {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #E7CC34;
+            text-align: center;
+        }
+
+        
+        table {
+            text-align: center;
+            border-collapse: collapse;            
+            box-shadow: 1px 7px 36px #000000;
+            
+        }
+
+        a {
+            text-decoration: none;
+            color: #E7CC34; 
+            font-size: 20px;
+        }
+
+         #navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(17, 17, 17, 0.63);
+            }
+
+        
+        #nome {
+            color: #FCDE4A;
+            
+        }
+
+        select:hover {
+            background-color: #C2A62C;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #C2A62C;
+            cursor: pointer;
+        }
+        a:hover {
+            color: #AA9224;
+            cursor: pointer;
+        }
+
+        #nome:hover {
+            color:#C2A62C;
+            cursor: pointer;
+        }
+        

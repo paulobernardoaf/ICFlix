@@ -1,0 +1,155 @@
+html {
+    -webkit-font-smoothing: antialiased;
+    float: left;
+}
+
+#trailer {
+    text-decoration: none;
+    color: #E7CC34;
+    font-size: 30px;
+}
+
+#trailer:hover {
+    color: #B9A22A;
+}
+
+#img {
+    float: left;
+    margin: 0.7em 0.7em 0.7em 2.6em;
+    width: 7%;
+}
+
+#novofilme {
+    text-decoration: none;
+    color: #E7CC34;
+    font-size: 1.1em;
+    margin-left: 80em;
+    margin-top: 1em;
+    float: left;
+    letter-spacing: 0.5px;
+}
+
+#novacategoria {
+    text-decoration: none;
+    color: #E7CC34;
+    font-size: 1.1em;
+    margin: 1em 0em 1em 1em;
+    float: left;
+    letter-spacing: 0.5px;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(17, 17, 17, 0.63);
+}
+
+#imagens {
+    background: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+li {
+    width: 250px;
+    height: 400px;
+    background: #fff;
+    float: left;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 5em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    transform: scale(1);
+    visibility: visible;
+}
+
+li:hover {
+    cursor: pointer;
+    transform: scale(1);
+    visibility: visible;
+    transition: all .2s ease-in-out;
+    transform: scale(1.1);
+    z-index: 100;
+    position: relative;
+    transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+    transition-duration: 500ms;
+}
+
+select {
+    text-decoration: none;
+    background-color: #0E0F11;
+    border-collapse: collapse;
+    border: none;
+    outline: hidden;
+    color: #E7CC34;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    margin: 1em 0em 0em 1.5em;
+    float: left;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    /* background: #111111; */
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1.9px;
+}
+
+#filme {
+    background-color: rgba(18, 18, 18, 0.97);
+    border-radius: 26px;
+    color: #E7CC34;
+    z-index: -1;
+    position: absolute;
+    float: left;
+    padding: 1em;
+    width: 800px;
+    margin-top: 5em;
+    margin-left: 27%;
+    /* text-align: center; */
+}
+
+#pop {
+    display: none;
+    position: fixed;
+    left: 0%;
+    margin-top: 5em;
+    margin-left: 0%;
+    padding: 10px;
+    width: 118em;
+    height: 900px;
+    border: none;
+    background-color: rgba(17, 17, 17, 0.8);
+}
+
+.cancel {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+iframe {
+    border-radius: 12px;
+}
+
+select:hover {
+    background-color: #C2A62C;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #C2A62C;
+    cursor: pointer;
+}
+
+#nome:hover {
+    color: #C2A62C;
+    cursor: pointer;
+}

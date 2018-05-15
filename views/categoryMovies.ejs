@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href=https://fonts.googleapis.com/css?family=Roboto:100 type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title> Filmes de <%= categories.name %> </title>
+    <link rel="stylesheet" type="text/css" href="/css/css-categoryMovies.css">
+</head>
+<body style="font-family:Roboto;text-align:left;">
+    <form style="float: left;margin:0em 1em 0em 0em;" method="GET" action="/gerenciar_categorias">
+        <button type="submit">Voltar para Gerência</button>
+    </form>
+    <h1 style="color:#E7CC34; margin: 1em 0em 1em 39.5%">Gerência da Categoria: <%= categories.name %></h1>
+    <br></br>
+    <table id="tabela.categorias" class="movies">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOME</th>
+                <th>DESCRIÇÂO</th>
+                <th>IMAGENS</th>
+                <th>IMAGENS 1280x720</th>
+                <th>TRAILER</th>
+                <th>AVALIAÇÃO</th>
+                <th>AÇÔES</th>
+            </tr>
+        </thead>
+        <tbody class="movies">
+            <% if(categories.filmes != 'undefined') { %>
+            <% for(var i=0; i<categories.filmes.length; i++) { %>
+                <% for(var k=0; k<movies.length; k++) { %>
+                    <% var as = movies[k]._id + ''; %>
+                    <% var ad = categories.filmes[i] + ''; %>
+                    <% if(as == ad) { %>
+                <tr class="movie">
+                    <td>
+                        <%= movies[k]._id %>
+                    </td>
+                    <td>
+                                    <%= movies[k].nome %> 
+                                </td>
+                                <td>
+                                    <%= movies[k].descricao %>
+                                </td>
+                                <td>
+                                    <%= movies[k].imagem %>
+                                </td>
+                                <td>
+                                    <%= movies[k].imagem2 %>
+                                </td>
+                                <td>
+                                    <%= movies[k].trailer %>
+                                </td>
+                                <td>
+                                    <%= movies[k].avaliacao %>
+                                </td>
+                                <td>
+                                    <button type="button" onclick="remover('<%= movies[k]._id %>' , '<%= categories._id %>')"> REMOVER </button>
+            </td>
+            <td hidden>
+                <p hidden="true" class="id">
+                    <%= movies[k]._id %>
+                </p>
+            </td>
+        </tr>
+        <% }} %>
+        <% }} %>
+    </tbody>
+    </table>
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                temQir();
+            }
+        }
+
+        function get() {            
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "/novo_filme");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    window.location.href = "/novo_filme"
+                }
+                else {
+                    alert('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send();
+        }
+
+        function remover(idFilme, idCategoria) {
+            console.log(idFilme, idCategoria);
+            var xhr = new XMLHttpRequest();
+            xhr.open('PUT', "/movies/" + idFilme + "/removeCategory/" + idCategoria);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    window.location.href = "/categoria/" + idCategoria + "/filmes"
+                }
+                else {
+                    alert('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
