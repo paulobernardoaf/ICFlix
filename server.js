@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 var db
 
-MongoClient.connect('###    INSERT YOUR DATABASE HERE ###', function (err, database) {
+MongoClient.connect('mongodb://admin:admin123@ds113871.mlab.com:13871/paulo-bernardo-database', function (err, database) {
     if (err) return console.log(err)
     db = database
     app.listen(3000, function () {
