@@ -11,3 +11,5 @@ Ao enviar um novo filme do youtube, certifique-se que vai enviar somente o link 
 Ao fazer um PUT(atualizar) seja ele de Filmes ou de Categorias certifique-se de que preencher todo o formulario.
 
 # Você precisa adiconar seu servidor do mongo no server.js, e ter cada collection ja criada
+
+Fim.
